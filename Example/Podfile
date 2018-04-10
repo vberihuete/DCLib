@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'DCLib_Example' do
+  pod 'DCLib', :path => '../'
+
+  target 'DCLib_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
