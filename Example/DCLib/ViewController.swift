@@ -7,12 +7,26 @@
 //
 
 import UIKit
+import DCLib
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var contentSV: UIStackView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        let userInput = DCInputField(label: "Username")
+        let passwordInput = DCInputField(label: "Password")
+        
+        userInput.textField.delegate = self
+        passwordInput.textField.delegate = self
+        
+        userInput.textField.returnKeyType = .next
+        passwordInput.textField.returnKeyType = .done
+        passwordInput.textField.isSecureTextEntry = true
+        
+        contentSV.insertArrangedSubview(passwordInput, at: 0)
+        contentSV.insertArrangedSubview(userInput, at: 0)
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,3 +36,10 @@ class ViewController: UIViewController {
 
 }
 
+
+extension ViewController: UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.shake()
+        return true
+    }
+}
